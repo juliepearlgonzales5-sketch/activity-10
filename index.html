@@ -1,927 +1,1204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ozamis City - Gateway to Western Mindanao</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Purple Gradient Theme */
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B8DD6 100%);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Navigation */
-        header {
-            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #8b5cf6 100%);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(124, 58, 237, 0.3);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: white;
-        }
-
-        .logo img {
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .logo span {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            padding: 10px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(76, 29, 149, 0.7), rgba(124, 58, 237, 0.7)), 
-                        url('[eazytraveler.net](https://eazytraveler.net/wp-content/uploads/2018/06/ozamiz-heritage-tour.jpg)');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding-top: 80px;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.4);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Sections */
-        section {
-            padding: 80px 5%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: #4c1d95;
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        /* About Section */
-        #about {
-            background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 100%);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .about-text h3 {
-            color: #4c1d95;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-
-        .about-text p {
-            margin-bottom: 15px;
-            color: #555;
-        }
-
-        .about-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.2);
-        }
-
-        /* Attractions Grid */
-        .attractions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .attraction-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(124, 58, 237, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .attraction-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.25);
-        }
-
-        .attraction-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .attraction-info {
-            padding: 25px;
-        }
-
-        .attraction-info h3 {
-            color: #4c1d95;
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
-
-        .attraction-info p {
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .attraction-tag {
-            display: inline-block;
-            padding: 5px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-
-        /* Culture Section */
-        #culture {
-            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);
-            color: white;
-        }
-
-        #culture .section-title h2 {
-            color: white;
-        }
-
-        #culture .section-title p {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .culture-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .culture-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .culture-card:hover {
-            background: rgba(255,255,255,0.2);
-            transform: scale(1.05);
-        }
-
-        .culture-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        .culture-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        /* Travel Section */
-        #travel {
-            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-        }
-
-        .travel-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .travel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .travel-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(124, 58, 237, 0.1);
-        }
-
-        .travel-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .travel-card-content {
-            padding: 25px;
-        }
-
-        .travel-card-content h3 {
-            color: #4c1d95;
-            margin-bottom: 10px;
-        }
-
-        .travel-card-content ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .travel-card-content li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-            color: #555;
-        }
-
-        .travel-card-content li:last-child {
-            border-bottom: none;
-        }
-
-        /* Contact Section */
-        #contact {
-            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%);
-            color: white;
-        }
-
-        #contact .section-title h2 {
-            color: white;
-        }
-
-        #contact .section-title p {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .contact-info {
-            padding: 20px;
-        }
-
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .contact-form {
-            background: rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.9);
-        }
-
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.4);
-        }
-
-        /* Footer */
-        footer {
-            background: #0f0a1e;
-            color: white;
-            padding: 50px 5% 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-section h4 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: #a855f7;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: #a855f7;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.5);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 968px) {
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                right: 0;
-                background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);
-                flex-direction: column;
-                align-items: center;
-                padding: 30px;
-                gap: 20px;
-                transform: translateY(-150%);
-                transition: transform 0.3s ease;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(7px, -6px);
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content p {
-                font-size: 1.2rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .attractions-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-
-            nav {
-                padding: 1rem 3%;
-            }
-
-            section {
-                padding: 60px 3%;
-            }
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ozamis City — Pearl of the North</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --p1: #0d0018;
+      --p2: #1a0033;
+      --p3: #3b0068;
+      --p4: #6a0dad;
+      --p5: #9b30ff;
+      --p6: #c77dff;
+      --p7: #e0aaff;
+      --gold: #f0c040;
+      --white: #f9f5ff;
+      --glass: rgba(155, 48, 255, 0.12);
+      --glass-border: rgba(199, 125, 255, 0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--p1);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(13,0,24,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0 1.5rem;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .nav-brand img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px var(--p5));
+    }
+
+    .nav-brand span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--p7);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: var(--p7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links a:hover {
+      background: var(--glass);
+      color: #fff;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border: none;
+      background: transparent;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--p6);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: rgba(13,0,24,0.97);
+      border-top: 1px solid var(--glass-border);
+      padding: 1rem 1.5rem 1.5rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      color: var(--p7);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(199,125,255,0.1);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: #fff; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── HERO ── */
+    #home {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://eazytraveler.net/wp-content/uploads/2018/06/ozamiz-heritage-tour.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.35) saturate(0.8);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(58,0,104,0.6) 0%, rgba(13,0,24,0.7) 60%, rgba(13,0,24,0.95) 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(106,13,173,0.35) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--p6);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 0.45rem 1.2rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      color: #fff;
+      text-shadow: 0 4px 40px rgba(155,48,255,0.5);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--p6);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--p7);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--p4), var(--p5));
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(106,13,173,0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(106,13,173,0.65);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--glass-border);
+      color: var(--p7);
+      margin-left: 1rem;
+      background: var(--glass);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(155,48,255,0.25);
+      color: #fff;
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-down span {
+      display: block;
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid var(--p6);
+      border-bottom: 2px solid var(--p6);
+      transform: rotate(45deg);
+      margin: -8px auto;
+      opacity: 0.7;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 1.5rem; }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--p5);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--p7);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 600px;
+      font-weight: 300;
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--p4), var(--p5));
+      border-radius: 2px;
+      margin: 1.25rem 0 2rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: linear-gradient(180deg, var(--p1) 0%, var(--p2) 100%); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .stat-card .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--p6);
+      line-height: 1;
+    }
+
+    .stat-card .lbl {
+      font-size: 0.8rem;
+      color: var(--p7);
+      margin-top: 0.4rem;
+      font-weight: 400;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-wrap img {
+      width: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+      height: 420px;
+      display: block;
+    }
+
+    .about-img-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -1.5rem;
+      background: linear-gradient(135deg, var(--p3), var(--p4));
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+
+    .about-img-badge .big { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); }
+    .about-img-badge .small { font-size: 0.75rem; color: var(--p7); margin-top: 0.25rem; }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-img-badge { bottom: -1rem; left: 0.5rem; }
+    }
+
+    /* ── ATTRACTIONS ── */
+    #attractions { background: var(--p1); }
+
+    .attractions-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) { .cards-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 580px) { .cards-grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(106,13,173,0.4);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .card:hover .card-img { transform: scale(1.05); }
+
+    .card-body {
+      padding: 1.4rem;
+    }
+
+    .card-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--p5);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--p7);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── CULTURE ── */
+    #culture { background: linear-gradient(180deg, var(--p2) 0%, var(--p1) 100%); }
+
+    .culture-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) { .culture-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .culture-imgs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .culture-imgs img {
+      border-radius: 14px;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .culture-imgs img:first-child {
+      grid-column: span 2;
+      height: 250px;
+    }
+
+    .culture-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .culture-list li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .culture-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--p3), var(--p4));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .culture-item-text .ttl { font-weight: 600; color: var(--p7); font-size: 0.95rem; }
+    .culture-item-text .dsc { font-size: 0.83rem; color: rgba(224,170,255,0.6); margin-top: 0.2rem; line-height: 1.5; }
+
+    /* ── TRANSPORTATION ── */
+    #transportation { background: var(--p1); }
+
+    .transport-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) { .transport-grid { grid-template-columns: 1fr; } }
+
+    .transport-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .transport-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .transport-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,0,24,0.9) 0%, transparent 55%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+    }
+
+    .transport-overlay h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: #fff;
+    }
+
+    .transport-overlay p {
+      font-size: 0.82rem;
+      color: var(--p7);
+      margin-top: 0.35rem;
+      font-weight: 300;
+    }
+
+    /* ── GALLERY ── */
+    #gallery { background: linear-gradient(180deg, var(--p2) 0%, var(--p1) 100%); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 700px) { .gallery-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 440px) { .gallery-grid { grid-template-columns: 1fr; } }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 14px;
+      cursor: zoom-in;
+    }
+
+    .gallery-item:first-child {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:first-child img { height: 300px; }
+    .gallery-item img:hover { transform: scale(1.07); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--p1); }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) { .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .contact-info-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+      align-items: flex-start;
+    }
+
+    .ci-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .ci-text .ci-lbl { font-size: 0.75rem; color: var(--p5); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .ci-text .ci-val { color: var(--p7); font-size: 0.9rem; margin-top: 0.25rem; }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.9rem 1.2rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: rgba(224,170,255,0.35); }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--p5); }
+
+    .contact-form textarea { min-height: 130px; }
+
+    .contact-form button {
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--p2);
+      border-top: 1px solid var(--glass-border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px var(--p5));
+    }
+
+    .footer-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--p7);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-links a {
+      color: rgba(224,170,255,0.55);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--p6); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(224,170,255,0.35);
+    }
+
+    /* Comment: Chosen city/municipality — Ozamis City, Misamis Occidental */
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--p2);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .modal-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--p6); margin-bottom: 0.75rem; }
+    .modal-box p { color: var(--p7); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .modal-close { cursor: pointer; }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <a href="#home" class="logo">
-                <img src="[upload.wikimedia.org](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Ozamiz_City_seal.svg/3840px-Ozamiz_City_seal.svg.png)" alt="Ozamis City Logo">
-                <span>Ozamis City</span>
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#attractions">Attractions</a></li>
-                <li><a href="#culture">Culture</a></li>
-                <li><a href="#travel">Travel</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Welcome to Ozamis City</h1>
-            <p>Gateway to Western Mindanao — Where History Meets Natural Beauty</p>
-            <a href="#attractions" class="btn">Explore Now</a>
-        </div>
-    </section>
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-brand">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/OzamizCityseal.svg/3840px-OzamizCityseal.svg.png" alt="Ozamis City Seal"/>
+      <span>Ozamis City</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#attractions">Attractions</a></li>
+      <li><a href="#culture">Culture</a></li>
+      <li><a href="#transportation">Getting Here</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" class="mobile-link">🏠 Home</a>
+    <a href="#about" class="mobile-link">ℹ️ About</a>
+    <a href="#attractions" class="mobile-link">🏛️ Attractions</a>
+    <a href="#culture" class="mobile-link">🎭 Culture</a>
+    <a href="#transportation" class="mobile-link">🚗 Getting Here</a>
+    <a href="#gallery" class="mobile-link">🖼️ Gallery</a>
+    <a href="#contact" class="mobile-link">✉️ Contact</a>
+  </div>
+</nav>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="section-title">
-            <h2>About Ozamis City</h2>
-            <p>Discover the heart of Misamis Occidental</p>
-        </div>
-        <div class="about-content">
-            <div class="about-text">
-                <h3>The City of Good Life</h3>
-                <p>Ozamis City, officially the City of Ozamiz, is a 3rd class component city in the province of Misamis Occidental, Philippines. It serves as the capital of the province and is the center of commerce, education, and government in the region.</p>
-                <p>Named after José Ozámiz, a revolutionary leader and delegate to the Malolos Congress, the city has a rich history dating back to Spanish colonial times. The famous Fort Santiago (Cotta Fort) stands as a testament to its historical significance.</p>
-                <p>With a population of over 140,000, Ozamis City offers a perfect blend of urban development and natural attractions, making it an ideal destination for both tourists and investors.</p>
-            </div>
-            <div class="about-image">
-                <img src="[encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCOHozGFD-Ksrwu94OTgpU5N8I7DuIGjM23Q&s)" alt="Ozamis City Municipal Hall">
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Pearl of the North · Misamis Occidental</div>
+    <h1 class="hero-title">Discover<br/><em>Ozamis City</em></h1>
+    <p class="hero-sub">Where history meets the sea — a city of heritage, faith, and breathtaking coastal charm in northern Mindanao.</p>
+    <a href="#attractions" class="btn btn-primary">Explore the City</a>
+    <a href="#about" class="btn btn-ghost">Learn More</a>
+  </div>
+  <div class="scroll-down">
+    <span></span><span></span>
+  </div>
+</section>
 
-    <!-- Attractions Section -->
-    <section id="attractions">
-        <div class="section-title">
-            <h2>Top Attractions</h2>
-            <p>Experience the beauty and history of Ozamis City</p>
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-in">
+        <p class="section-label">About the City</p>
+        <h2 class="section-title">A City Rooted in History & Heart</h2>
+        <div class="divider"></div>
+        <p class="section-desc">Ozamis City, fondly known as the "Pearl of the North," is a first-class city in Misamis Occidental, Mindanao. Nestled along the shores of Panguil Bay, the city is known for its rich colonial history, vibrant culture, and welcoming people.</p>
+        <p class="section-desc" style="margin-top:1rem;">From the iconic Cotta Fortress to its thriving food scene, Ozamis blends the old and the new into a destination unlike any other in Northern Mindanao.</p>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="num">1st</div>
+            <div class="lbl">Class City in<br/>Misamis Occidental</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">~120K</div>
+            <div class="lbl">City Population<br/>(Latest Census)</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">1948</div>
+            <div class="lbl">Year Chartered<br/>as a City</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">72 km²</div>
+            <div class="lbl">Total Land<br/>Area</div>
+          </div>
         </div>
-        <div class="attractions-grid">
-            <div class="attraction-card">
-                <img src="[blogger.googleusercontent.com](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWkNe6DlgSzVCD-oA-2fDDyxIm_kZqIW9Z_gDd_VBYGMg61irvKcB2AFFJZydiD0qJKursTnMiR3Yu4TLAqYH1BHtJqRLGr27m58TkKySH9T7PsuVuAuItyKxeBqfPE2-TShkyMs4KYeXe83PQAosiTL6Xoa7O5CFv_sn34vmU-R8U1qQ24VLK5ggpVQ/s1600/3.jpg)" alt="Cotta Shrine">
-                <div class="attraction-info">
-                    <h3>Cotta Shrine & Fort</h3>
-                    <p>A historic Spanish-era stone fort built in 1756, now a religious shrine and one of the most visited landmarks in the city.</p>
-                    <span class="attraction-tag">Historical Site</span>
-                </div>
-            </div>
-            <div class="attraction-card">
-                <img src="[encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScOhMqKTkkfOhLF59Bh0l99HJjZp8KOe31xg&s)" alt="Wellness Park">
-                <div class="attraction-info">
-                    <h3>Ozamis Wellness Park</h3>
-                    <p>A modern recreational park perfect for morning jogs, family picnics, and outdoor activities with scenic views.</p>
-                    <span class="attraction-tag">Recreation</span>
-                </div>
-            </div>
-            <div class="attraction-card">
-                <img src="[encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDTcZaQBClOjfXju-sgDrDiFoku0KBcRwnuw&s)" alt="Cotta Beach">
-                <div class="attraction-info">
-                    <h3>Cotta Beach</h3>
-                    <p>A serene beach located near the historic Cotta Fort, perfect for swimming and relaxation with stunning sunset views.</p>
-                    <span class="attraction-tag">Beach</span>
-                </div>
-            </div>
-            <div class="attraction-card">
-                <img src="[traveltabai.com](https://www.traveltabai.com/wp-content/uploads/2019/04/Villa-Tagalog-Beach-Resort-Ella-1.jpg)" alt="Villa Tagalog Beach Resort">
-                <div class="attraction-info">
-                    <h3>Villa Tagalog Beach Resort</h3>
-                    <p>A beautiful beach resort offering crystal clear waters, cottages, and various water activities for the whole family.</p>
-                    <span class="attraction-tag">Resort</span>
-                </div>
-            </div>
-            <div class="attraction-card">
-                <img src="[blogger.googleusercontent.com](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgqXKVUpnQY_UI9zInrwMTADIrroUtg5awwrST6oLcQVls3m3PiO0asU7n0ZAL77grIJbbO_D8tYEAd99qlv83nbNgTnk570tjNLfW0ei3rV0xFE73Vnfz2ONItANmxKfQE-8nAxBkTRVjt/w640-h427/osrox-park-ozamis-city.JPG)" alt="Sirang Lente Park">
-                <div class="attraction-info">
-                    <h3>Sirang Lente (Osrox Park)</h3>
-                    <p>A popular viewpoint and recreational area offering panoramic views of the city and surrounding landscapes.</p>
-                    <span class="attraction-tag">Viewpoint</span>
-                </div>
-            </div>
-            <div class="attraction-card">
-                <img src="[encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5aOe0dYe91qixjXBnMhVrqgdivQNZaynmug&s)" alt="Coastal Road">
-                <div class="attraction-info">
-                    <h3>Ozamis Coastal Road</h3>
-                    <p>A scenic coastal highway perfect for leisurely drives and capturing beautiful sunset photographs.</p>
-                    <span class="attraction-tag">Scenic Drive</span>
-                </div>
-            </div>
+      </div>
+      <div class="about-img-wrap fade-in">
+        <img src="https://www.ucanews.com/directory/uploads/dioceses/promo/1693777313.jpg" alt="Ozamis City Archdiocese"/>
+        <div class="about-img-badge">
+          <div class="big">♦ 1948</div>
+          <div class="small">Chartered City Since</div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Culture Section -->
-    <section id="culture">
-        <div class="section-title">
-            <h2>Culture & Heritage</h2>
-            <p>Rich traditions and vibrant community life</p>
+<!-- ATTRACTIONS -->
+<section id="attractions">
+  <div class="container">
+    <div class="attractions-header">
+      <div class="fade-in">
+        <p class="section-label">Must-See Places</p>
+        <h2 class="section-title">Top Attractions</h2>
+        <div class="divider"></div>
+      </div>
+      <p class="section-desc fade-in" style="max-width:340px;">From heritage sites to pristine beaches — there's always something waiting to be discovered.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card fade-in">
+        <div style="overflow:hidden;">
+          <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWkNe6DlgSzVCD-oA-2fDDyxImkZqIW9ZgDdVBYGMg61irvKcB2AFFJZydiD0qJKursTnMiR3Yu4TLAqYH1BHtJqRLGr27m58TkKySH9T7PsuVuAuItyKxeBqfPE2-TShkyMs4KYeXe83PQAosiTL6Xoa7O5CFvsn34vmU-R8U1qQ24VLK5ggpVQ/s1600/3.jpg" alt="Cotta Shrine"/>
         </div>
-        <div class="culture-grid">
-            <div class="culture-card">
-                <img src="[ucanews.com](https://www.ucanews.com/directory/uploads/dioceses/promo/1693777313.jpg)" alt="Archdiocese of Ozamis">
-                <h3>Archdiocese of Ozamis</h3>
-                <p>The spiritual heart of the city, the Archdiocese serves the Catholic community with historic churches and vibrant religious celebrations.</p>
-            </div>
-            <div class="culture-card">
-                <img src="[encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH_0U3UUmJfW35WtP0ZOZx5e29djBl3FmXCw&s)" alt="Food Park">
-                <h3>Local Cuisine & Food Parks</h3>
-                <p>Experience authentic Ozameño cuisine at local food parks featuring fresh seafood, native delicacies, and fusion dishes.</p>
-            </div>
-            <div class="culture-card">
-                <img src="[eazytraveler.net](https://eazytraveler.net/wp-content/uploads/2018/06/ozamiz-heritage-tour.jpg)" alt="Heritage Sites">
-                <h3>Heritage Tours</h3>
-                <p>Explore the rich Spanish colonial heritage through guided tours of historic sites, ancestral houses, and cultural landmarks.</p>
-            </div>
+        <div class="card-body">
+          <div class="card-tag">Heritage</div>
+          <h3 class="card-title">Cotta Shrine & Fort</h3>
+          <p class="card-desc">A Spanish-era fortress built in the 1700s — one of the few surviving forts in Mindanao. An iconic symbol of Ozamis history and resilience.</p>
         </div>
-    </section>
+      </div>
+      <div class="card fade-in">
+        <div style="overflow:hidden;">
+          <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScOhMqKTkkfOhLF59Bh0l99HJjZp8KOe31xg&s" alt="Wellness Park"/>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Nature & Leisure</div>
+          <h3 class="card-title">Wellness Park</h3>
+          <p class="card-desc">A lush recreational space perfect for morning jogs, family picnics, and relaxation — right in the heart of the city.</p>
+        </div>
+      </div>
+      <div class="card fade-in">
+        <div style="overflow:hidden;">
+          <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDTcZaQBClOjfXju-sgDrDiFoku0KBcRwnuw&s" alt="Cotta Beach"/>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Beach</div>
+          <h3 class="card-title">Cotta Beach</h3>
+          <p class="card-desc">A scenic shoreline along Panguil Bay, where locals and visitors come to unwind with stunning water views and golden sunsets.</p>
+        </div>
+      </div>
+      <div class="card fade-in">
+        <div style="overflow:hidden;">
+          <img class="card-img" src="https://www.traveltabai.com/wp-content/uploads/2019/04/Villa-Tagalog-Beach-Resort-Ella-1.jpg" alt="Villa Tagalog Beach Resort"/>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Resort</div>
+          <h3 class="card-title">Villa Tagalog Beach Resort</h3>
+          <p class="card-desc">A beloved getaway spot near the city with calm waters, cottages by the shore, and the perfect weekend escape vibe.</p>
+        </div>
+      </div>
+      <div class="card fade-in">
+        <div style="overflow:hidden;">
+          <img class="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH0U3UUmJfW35WtP0ZOZx5e29djBl3FmXCw&s" alt="Food Park"/>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Dining</div>
+          <h3 class="card-title">Food Park</h3>
+          <p class="card-desc">Ozamis' go-to night spot for local food, street eats, and community vibes. Perfect for a fun evening with friends and family.</p>
+        </div>
+      </div>
+      <div class="card fade-in">
+        <div style="overflow:hidden;">
+          <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgqXKVUpnQYUI9zInrwMTADIrroUtg5awwrST6oLcQVls3m3PiO0asU7n0ZAL77grIJbbO_D8tYEAd99qlv83nbNgTnk570tjNLfW0ei3rV0xFE73Vnfz2ONItANmxKfQE-8nAxBkTRVjt/w640-h427/osrox-park-ozamis-city.JPG" alt="Sirang Lente Park"/>
+        </div>
+        <div class="card-body">
+          <div class="card-tag">Park</div>
+          <h3 class="card-title">Sirang Lente / OSROX Park</h3>
+          <p class="card-desc">A charming urban park with open spaces and relaxing greenery — a community favorite for leisure and local events.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Travel Section -->
-    <section id="travel">
-        <div class="section-title">
-            <h2>Getting Around</h2>
-            <p>Travel information and transportation options</p>
-        </div>
-        <div class="travel-content">
-            <div class="travel-grid">
-                <div class="travel-card">
-                    <img src="[blogger.googleusercontent.com](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7eDedjCNLkTx2ZnlBUosF4rVqEH77lfRyULeRxXSHqxvbMakh1vyf83CRCaLgihlRX6F0TAzM9tWVSBRpBoGdaN_Ow9V-0xQ1AR11M2u-Y_nHbNyj88xToeq7_Zt2Te5_4tuRnA/s1600/DSCF4477.JPG)" alt="Transportation">
-                    <div class="travel-card-content">
-                        <h3>Transportation Options</h3>
-                        <ul>
-                            <li>🚐 Jeepneys - Main public transport</li>
-                            <li>🛺 Tricycles - For short distances</li>
-                            <li>🚌 Buses - To nearby cities</li>
-                            <li>⛴️ Ferry - To Mukas Port</li>
-                            <li>✈️ Labo Airport - Domestic flights</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="travel-card">
-                    <img src="[encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCOHozGFD-Ksrwu94OTgpU5N8I7DuIGjM23Q&s)" alt="Municipal Hall">
-                    <div class="travel-card-content">
-                        <h3>Essential Information</h3>
-                        <ul>
-                            <li>📍 Location: Misamis Occidental</li>
-                            <li>🌡️ Climate: Tropical</li>
-                            <li>🗣️ Languages: Cebuano, Filipino, English</li>
-                            <li>💱 Currency: Philippine Peso (PHP)</li>
-                            <li>⏰ Time Zone: GMT+8</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="travel-card">
-                    <img src="[encrypted-tbn0.gstatic.com](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5aOe0dYe91qixjXBnMhVrqgdivQNZaynmug&s)" alt="Coastal Area">
-                    <div class="travel-card-content">
-                        <h3>Best Time to Visit</h3>
-                        <ul>
-                            <li>🌞 Dry Season: March - May</li>
-                            <li>🎉 Fiesta: January (Sinulog)</li>
-                            <li>🌧️ Rainy Season: June - November</li>
-                            <li>🎄 Christmas Season: December</li>
-                            <li>📸 Photography: Sunrise & Sunset</li>
-                        </ul>
-                    </div>
-                </div>
+<!-- CULTURE -->
+<section id="culture">
+  <div class="container">
+    <div class="culture-grid">
+      <div class="culture-imgs fade-in">
+        <img src="https://www.ucanews.com/directory/uploads/dioceses/promo/1693777313.jpg" alt="Archdiocese of Ozamis"/>
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgWkNe6DlgSzVCD-oA-2fDDyxImkZqIW9ZgDdVBYGMg61irvKcB2AFFJZydiD0qJKursTnMiR3Yu4TLAqYH1BHtJqRLGr27m58TkKySH9T7PsuVuAuItyKxeBqfPE2-TShkyMs4KYeXe83PQAosiTL6Xoa7O5CFvsn34vmU-R8U1qQ24VLK5ggpVQ/s1600/3.jpg" alt="Cotta Fortress"/>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCOHozGFD-Ksrwu94OTgpU5N8I7DuIGjM23Q&s" alt="Municipal Hall"/>
+      </div>
+      <div class="fade-in">
+        <p class="section-label">Heritage & Culture</p>
+        <h2 class="section-title">Living History, Vibrant Identity</h2>
+        <div class="divider"></div>
+        <p class="section-desc">Ozamis City is a melting pot of Visayan and Maranao influences, shaped by centuries of trade, faith, and community. Its culture is alive in every fiesta, every church bell, and every warm smile from a local.</p>
+        <ul class="culture-list">
+          <li>
+            <div class="culture-icon">⛪</div>
+            <div class="culture-item-text">
+              <div class="ttl">Archdiocese of Ozamis</div>
+              <div class="dsc">Seat of the Roman Catholic Archdiocese — a spiritual and architectural landmark of the city.</div>
             </div>
-        </div>
-    </section>
+          </li>
+          <li>
+            <div class="culture-icon">🎉</div>
+            <div class="culture-item-text">
+              <div class="ttl">Sinulog & Local Fiestas</div>
+              <div class="dsc">Colorful festivals celebrating patron saints with street dancing, music, and local delicacies.</div>
+            </div>
+          </li>
+          <li>
+            <div class="culture-icon">🍚</div>
+            <div class="culture-item-text">
+              <div class="ttl">Local Cuisine</div>
+              <div class="dsc">From kinilaw to kinamatisang manok — Ozamis food is fresh, bold, and uniquely Mindanaoan.</div>
+            </div>
+          </li>
+          <li>
+            <div class="culture-icon">🏛️</div>
+            <div class="culture-item-text">
+              <div class="ttl">Colonial Architecture</div>
+              <div class="dsc">Walking through the city reveals Spanish-era structures that tell the story of 300+ years of history.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="section-title">
-            <h2>Contact Us</h2>
-            <p>Get in touch with the Ozamis City Tourism Office</p>
+<!-- TRANSPORTATION -->
+<section id="transportation">
+  <div class="container">
+    <div class="fade-in" style="text-align:center; max-width:600px; margin:0 auto;">
+      <p class="section-label">Getting Here</p>
+      <h2 class="section-title">How to Reach Ozamis City</h2>
+      <div class="divider" style="margin:1.25rem auto 1rem;"></div>
+      <p class="section-desc">Ozamis City is accessible by air, land, and sea — making it one of the most connected cities in northern Mindanao.</p>
+    </div>
+    <div class="transport-grid">
+      <div class="transport-card fade-in">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7eDedjCNLkTx2ZnlBUosF4rVqEH77lfRyULeRxXSHqxvbMakh1vyf83CRCaLgihlRX6F0TAzM9tWVSBRpBoGdANOw9V-0xQ1AR11M2u-YnHbNyj88xToeq7Zt2Te54tuRnA/s1600/DSCF4477.JPG" alt="Transportation"/>
+        <div class="transport-overlay">
+          <h3>🚐 Bus & Van</h3>
+          <p>Regular bus and van routes connect Ozamis to Cagayan de Oro, Dipolog, and other key cities in Mindanao.</p>
         </div>
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3>Visit Ozamis City</h3>
-                <p>We're here to help you plan your perfect trip to Ozamis City. Reach out for tourist information, local guides, and travel assistance.</p>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div>
-                        <strong>Address</strong><br>
-                        City Hall, Ozamis City<br>
-                        Misamis Occidental, Philippines 7200
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div>
-                        <strong>Phone</strong><br>
-                        +63 (088) 521-0000
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div>
-                        <strong>Email</strong><br>
-                        tourism@ozamiscity.gov.ph
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">🕐</div>
-                    <div>
-                        <strong>Office Hours</strong><br>
-                        Monday - Friday: 8:00 AM - 5:00 PM
-                    </div>
-                </div>
-            </div>
-            
-            <div class="contact-form">
-                <form id="contactForm" onsubmit="handleSubmit(event)">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required placeholder="Enter your name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="Enter your email">
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required placeholder="What's this about?">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
-            </div>
+      </div>
+      <div class="transport-card fade-in">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5aOe0dYe91qixjXBnMhVrqgdivQNZaynmug&s" alt="Coastal Road"/>
+        <div class="transport-overlay">
+          <h3>🛣️ Coastal Highway</h3>
+          <p>The scenic coastal road offers a breathtaking drive alongside Panguil Bay — connecting the city to neighboring towns.</p>
         </div>
-    </section>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.5rem;" class="fade-in">
+      <div class="stat-card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">✈️</div>
+        <div class="num" style="font-size:1.1rem;">By Air</div>
+        <div class="lbl">Ozamis Airport (OZC) with flights from Manila and Cebu</div>
+      </div>
+      <div class="stat-card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">⛴️</div>
+        <div class="num" style="font-size:1.1rem;">By Sea</div>
+        <div class="lbl">Ferry routes via Panguil Bay connecting to Lanao del Norte</div>
+      </div>
+      <div class="stat-card" style="text-align:center;">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">🚗</div>
+        <div class="num" style="font-size:1.1rem;">By Land</div>
+        <div class="lbl">~3 hrs from Cagayan de Oro via Salay coastal highway</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>About Ozamis City</h4>
-                <p>Ozamis City is the capital of Misamis Occidental, known for its rich history, beautiful beaches, and warm hospitality. Experience the gateway to Western Mindanao.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#attractions">Attractions</a>
-                <a href="#culture">Culture</a>
-                <a href="#travel">Travel</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="footer-section">
-                <h4>Top Destinations</h4>
-                <a href="#attractions">Cotta Shrine & Fort</a>
-                <a href="#attractions">Wellness Park</a>
-                <a href="#attractions">Cotta Beach</a>
-                <a href="#attractions">Villa Tagalog Resort</a>
-                <a href="#attractions">Sirang Lente</a>
-            </div>
-            <div class="footer-section">
-                <h4>Connect With Us</h4>
-                <p>📘 Facebook: /OzamisCityTourism</p>
-                <p>📸 Instagram: @visitozamis</p>
-                <p>🐦 Twitter: @OzamisCity</p>
-                <p>📺 YouTube: Ozamis City Official</p>
-            </div>
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="fade-in" style="text-align:center; max-width:600px; margin:0 auto;">
+      <p class="section-label">Photo Gallery</p>
+      <h2 class="section-title">Ozamis in Pictures</h2>
+      <div class="divider" style="margin:1.25rem auto 0.5rem;"></div>
+      <p class="section-desc">A glimpse of the beauty that makes Ozamis City unforgettable.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item fade-in">
+        <img src="https://eazytraveler.net/wp-content/uploads/2018/06/ozamiz-heritage-tour.jpg" alt="Heritage Tour"/>
+      </div>
+      <div class="gallery-item fade-in">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgqXKVUpnQYUI9zInrwMTADIrroUtg5awwrST6oLcQVls3m3PiO0asU7n0ZAL77grIJbbO_D8tYEAd99qlv83nbNgTnk570tjNLfW0ei3rV0xFE73Vnfz2ONItANmxKfQE-8nAxBkTRVjt/w640-h427/osrox-park-ozamis-city.JPG" alt="OSROX Park"/>
+      </div>
+      <div class="gallery-item fade-in">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCOHozGFD-Ksrwu94OTgpU5N8I7DuIGjM23Q&s" alt="Municipal Hall"/>
+      </div>
+      <div class="gallery-item fade-in">
+        <img src="https://www.traveltabai.com/wp-content/uploads/2019/04/Villa-Tagalog-Beach-Resort-Ella-1.jpg" alt="Villa Tagalog"/>
+      </div>
+      <div class="gallery-item fade-in">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDTcZaQBClOjfXju-sgDrDiFoku0KBcRwnuw&s" alt="Cotta Beach"/>
+      </div>
+      <div class="gallery-item fade-in">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5aOe0dYe91qixjXBnMhVrqgdivQNZaynmug&s" alt="Coastal Road"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="fade-in" style="margin-bottom:3rem;">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Visit or Contact Us</h2>
+      <div class="divider"></div>
+      <p class="section-desc">Planning a visit to Ozamis City? Reach out and we'll help you make the most of your trip.</p>
+    </div>
+    <div class="contact-wrapper">
+      <div class="fade-in">
+        <div class="contact-info-item">
+          <div class="ci-icon">📍</div>
+          <div class="ci-text">
+            <div class="ci-lbl">Address</div>
+            <div class="ci-val">Ozamis City Hall, Ozamis City, Misamis Occidental, Philippines</div>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Ozamis City Tourism Office. All rights reserved.</p>
-            <p>Designed for Activity 10 - Promotional Website</p>
+        <div class="contact-info-item">
+          <div class="ci-icon">📞</div>
+          <div class="ci-text">
+            <div class="ci-lbl">Phone</div>
+            <div class="ci-val">(088) 521-xxxx</div>
+          </div>
         </div>
-    </footer>
+        <div class="contact-info-item">
+          <div class="ci-icon">🌐</div>
+          <div class="ci-text">
+            <div class="ci-lbl">Website</div>
+            <div class="ci-val">www.ozamiscity.gov.ph</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon">📸</div>
+          <div class="ci-text">
+            <div class="ci-lbl">Social Media</div>
+            <div class="ci-val">@OzamisCityOfficial</div>
+          </div>
+        </div>
+        <div class="about-img-wrap" style="margin-top:2rem;">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCOHozGFD-Ksrwu94OTgpU5N8I7DuIGjM23Q&s" alt="City Hall" style="height:200px;border-radius:16px;"/>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="contact-form">
+          <input type="text" placeholder="Your Full Name" required/>
+          <input type="email" placeholder="Email Address" required/>
+          <input type="text" placeholder="Subject"/>
+          <textarea placeholder="Your message or inquiry..."></textarea>
+          <button class="btn btn-primary" onclick="handleSubmit()">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- JavaScript for Mobile Menu -->
-    <script>
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const hamburger = document.getElementById('hamburger');
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        }
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/OzamizCityseal.svg/3840px-OzamizCityseal.svg.png" alt="Seal"/>
+    <span>Ozamis City — Pearl of the North</span>
+  </div>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#attractions">Attractions</a>
+    <a href="#culture">Culture</a>
+    <a href="#transportation">Getting Here</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p class="footer-copy">© 2024 Ozamis City Promotional Website · Chosen City: Ozamis City, Misamis Occidental · For Academic Use Only</p>
+</footer>
 
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-                document.getElementById('hamburger').classList.remove('active');
-            });
-        });
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <h3>Message Sent! 🎉</h3>
+    <p>Thank you for reaching out! We'll get back to you soon with all the information you need about Ozamis City.</p>
+    <button class="btn btn-primary modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
 
-        // Form submission handler
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            event.target.reset();
-        }
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
 
-        // Smooth scroll for older browsers
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function handleSubmit() {
+    const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+    for (const input of inputs) {
+      if (!input.value.trim()) {
+        input.style.borderColor = '#ff6b6b';
+        setTimeout(() => input.style.borderColor = '', 1500);
+        return;
+      }
+    }
+    document.getElementById('modal').classList.add('open');
+    inputs.forEach(i => i.value = '');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
 </body>
 </html>
